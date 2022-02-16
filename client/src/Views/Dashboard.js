@@ -17,8 +17,8 @@ export default function Dashboard () {
         })
     }, 5000)
   }, [])
-
-  console.log(number, hora)
+  
+  // console.log(number, hora)
 
   useEffect(() => {
     const dados = {
