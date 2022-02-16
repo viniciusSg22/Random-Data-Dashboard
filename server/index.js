@@ -12,6 +12,11 @@ app.post('/api', async (req, res) => {
   res.json(dado)
 })
 
+app.get('/api/list', async (req, res) => {
+  const dados = await Dados.findAll();
+  res.json(dados)
+})
+
 app.listen(3001, () => {
   console.log('Servidor rodando na porta 3001')
 })

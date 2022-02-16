@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-// import ApexChart from '../Components/ApexChart'
+import ApexChart from '../Components/ApexChart'
 import axios from 'axios'
 
 export default function Dashboard () {
@@ -27,12 +27,12 @@ export default function Dashboard () {
     }
     axios.post('http://localhost:3001/api', dados).then(res => {
     })
-  }, [])
+  }, [hora, number])
 
   return (
     <div>
       <h1>Dashboard</h1>
-      {/* <ApexChart/> */}
+      <ApexChart/>
       {number}
     </div>
   )
