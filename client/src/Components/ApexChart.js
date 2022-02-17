@@ -1,20 +1,30 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import Chart from 'react-apexcharts'
+import { BASE_URL } from '../utils/requests'
 
-export default function ApexChart () {
+export default function ApexChart() {
+  const [array, setArray] = useState([])
+  useEffect(() => {
+    axios.get(`${BASE_URL}/api/list`).then((res) => {
+      setArray(res.data)
+    })
+  })
+  const myCategories = array.map((x) => x.createdAt)
+  const myData = array.map((x) => x.numero)
   const dados = {
     options: {
       chart: {
         id: 'basic-bar'
       },
       xaxis: {
-        categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+        categories: myCategories
       }
     },
     series: [
       {
         name: 'series-1',
-        data: [30, 40, 45, 50, 49, 60, 70, 91, 30, 40, 45, 50, 49, 60, 70, 91, 30, 40, 45, 50, 49, 60, 70, 91, 30, 40, 45, 50, 49, 60, 70, 91, 30, 40, 45, 50, 49, 60, 70, 91, 30, 40, 45, 50, 49, 60, 70, 91]
+        data: myData
       }
     ]
   }

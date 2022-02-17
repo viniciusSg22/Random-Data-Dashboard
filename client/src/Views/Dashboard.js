@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import ApexChart from '../Components/ApexChart'
 import axios from 'axios'
+import { BASE_URL } from '../utils/requests'
 
-export default function Dashboard () {
+export default function Dashboard() {
   const [number, setNumber] = useState(0)
   const [horario, setHorario] = useState('')
   let dataObj = new Date()
@@ -15,9 +16,9 @@ export default function Dashboard () {
           setNumber(res.data.decimal)
           setHorario(horario)
         })
-    }, 5000)
+    }, 10000)
   }, [])
-  
+
   // console.log(number, hora)
 
   useEffect(() => {
@@ -25,14 +26,14 @@ export default function Dashboard () {
       numero: number,
       hora: hora
     }
-    axios.post('http://localhost:3001/api', dados).then(res => {
+    axios.post(`${BASE_URL}/api`, dados).then(res => {
     })
   }, [hora, number])
 
   return (
     <div>
       <h1>Dashboard</h1>
-      <ApexChart/>
+      <ApexChart />
       {number}
     </div>
   )
