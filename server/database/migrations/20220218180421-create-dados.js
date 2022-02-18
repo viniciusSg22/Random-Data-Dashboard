@@ -11,9 +11,6 @@ module.exports = {
       numero: {
         type: Sequelize.DECIMAL
       },
-      data: {
-        type: Sequelize.DATE
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -3,38 +3,32 @@ import ApexChart from '../Components/ApexChart'
 import axios from 'axios'
 import { BASE_URL } from '../utils/requests'
 
-export default function Dashboard() {
+export default function Dashboard () {
   const [number, setNumber] = useState(0)
-  const [horario, setHorario] = useState('')
-  let dataObj = new Date()
-  const hora = `${dataObj.getFullYear()}-${dataObj.getMonth() + 1}-${dataObj.getDate()} ${dataObj.getHours()}:${dataObj.getMinutes()}:${dataObj.getSeconds()}`
 
   useEffect(() => {
     setInterval(() => {
       axios.get('https://random-data-api.com/api/number/random_number').then(
         res => {
           setNumber(res.data.decimal)
-          setHorario(horario)
         })
     }, 10000)
   }, [])
 
-  // console.log(number, hora)
-
   useEffect(() => {
-    const dados = {
-      numero: number,
-      hora: hora
+    if (number === 0) {} else {
+      const dados = {
+        numero: number
+      }
+      axios.post(`${BASE_URL}/api`, dados).then(res => {
+      })
     }
-    axios.post(`${BASE_URL}/api`, dados).then(res => {
-    })
-  }, [hora, number])
+  }, [number])
 
   return (
     <div>
       <h1>Dashboard</h1>
-      <ApexChart />
-      {number}
+      <ApexChart teste={number} style={{margin: '0 auto'}} />
     </div>
   )
 }

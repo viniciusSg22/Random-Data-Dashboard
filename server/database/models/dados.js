@@ -14,8 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Dados.init({
-    numero: DataTypes.DECIMAL,
-    data: DataTypes.DATE
+    numero: DataTypes.DECIMAL
   }, {
     sequelize,
     modelName: 'Dados',

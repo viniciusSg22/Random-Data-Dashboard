@@ -3,14 +3,14 @@ import React, { useEffect, useState } from 'react'
 import Chart from 'react-apexcharts'
 import { BASE_URL } from '../utils/requests'
 
-export default function ApexChart() {
+export default function ApexChart (props) {
   const [array, setArray] = useState([])
   useEffect(() => {
     axios.get(`${BASE_URL}/api/list`).then((res) => {
       setArray(res.data)
     })
-  })
-  const myCategories = array.map((x) => x.createdAt)
+  }, [props.teste])
+  const myCategories = array.map((x) => x.createdAt.slice(0, 19).replace('T', ' '))
   const myData = array.map((x) => x.numero)
   const dados = {
     options: {
@@ -23,7 +23,7 @@ export default function ApexChart() {
     },
     series: [
       {
-        name: 'series-1',
+        name: 'Número',
         data: myData
       }
     ]
@@ -34,7 +34,7 @@ export default function ApexChart() {
         options={dados.options}
         series={dados.series}
         type='line'
-        width='1000' />
+        width='90%' />
     </div>
   )
 }
